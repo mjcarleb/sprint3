@@ -66,7 +66,7 @@ merged_df = firm_ddf.merge(street_ddf, how="outer", left_index=True, right_index
 
 # Now, send matched and unmatched trades through the process
 bpmn_process_id = "Process_cdd8ac1b-a3e5-4467-8061-784691625fe2"
-#bpmn_process_id = "sid-1766A6F0-B9E4-41B6-8995-413493416BBB"
+bpmn_process_id = "sid-1766A6F0-B9E4-41B6-8995-413493416BBB"
 
 loop = asyncio.get_event_loop()
 try:
