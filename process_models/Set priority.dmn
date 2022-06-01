@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dmn:definitions namespace="http://www.signavio.com/dmn/1.2/diagram/4bde7d02245c42ebaacced40c48f1ec4.xml" exporterVersion="16.0.1" name="Set priority" id="id-b40e7d48c1004231b2e4a4206a480f67" sigExt:revisionNumber="3" sigExt:revisionId="b3930b7d3b604c60bc59af552814e42f" xmlns="http://www.signavio.com/dmn/1.2/diagram/4bde7d02245c42ebaacced40c48f1ec4.xml" xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns:sigExt="http://www.signavio.com/schema/dmn/1.2/" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/">
+    <dmn:extensionElements/>
+    <dmn:itemDefinition typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" isCollection="false" name="decidePriority" id="id-f577f0530b15c8f2d7be42f3aa6f7c52" label="Decide priority&#10;">
+        <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemDefinition>
+    <dmn:itemDefinition typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" isCollection="false" name="priority" id="id-110e3f41465fc44e7c75763aca7d454a" label="priority">
+        <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemDefinition>
+    <dmn:itemDefinition typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" isCollection="false" name="amount" id="id-d11d41f0b78aa894053429b40cc426f8" label="amount">
+        <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemDefinition>
+    <dmn:inputData name="amount" id="id-e903ae6200b1e6869218ab531ad6b634" label="amount" sigExt:diagramId="4bde7d02245c42ebaacced40c48f1ec4" sigExt:shapeId="sid-79DE2327-3CCC-4F90-A2FD-F2DEF586EC30">
+        <dmn:extensionElements/>
+        <dmn:variable typeRef="amount" name="amount" id="id-e903ae6200b1e6869218ab531ad6b634_variable"/>
+    </dmn:inputData>
+    <dmn:decision name="decidePriority" id="id-81a6cbb31cb61ff0933e1f4a3c733755" label="Decide priority&#10;" sigExt:diagramId="4bde7d02245c42ebaacced40c48f1ec4" sigExt:shapeId="sid-20FA7A78-173D-451D-978A-E95219CA3CC3">
+        <dmn:extensionElements/>
+        <dmn:variable typeRef="decidePriority" name="decidePriority" id="id-81a6cbb31cb61ff0933e1f4a3c733755_variable"/>
+        <dmn:informationRequirement>
+            <dmn:requiredInput href="#id-e903ae6200b1e6869218ab531ad6b634"/>
+        </dmn:informationRequirement>
+        <dmn:decisionTable hitPolicy="UNIQUE">
+            <dmn:input id="id-d6d76b390944c3a5ad3a8f374bdfb4e5" label="">
+                <dmn:inputExpression>
+                    <dmn:text>number(amount)</dmn:text>
+                </dmn:inputExpression>
+            </dmn:input>
+            <dmn:output name="decidePriority" typeRef="priority" id="id-a8e020b55ff44703d631e4ebb48ad7be" label="Decide priority&#10;"/>
+            <dmn:annotation name="New Annotation"/>
+            <dmn:rule id="id-691ec561d75db810892178eca47dcec9">
+                <dmn:inputEntry>
+                    <dmn:text>&gt; 0</dmn:text>
+                </dmn:inputEntry>
+                <dmn:outputEntry>
+                    <dmn:text>"High"</dmn:text>
+                </dmn:outputEntry>
+                <dmn:annotationEntry>
+                    <dmn:text>string(-)</dmn:text>
+                </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="id-df138f098ffa64ae19f78bf1fe64b9cc">
+                <dmn:inputEntry>
+                    <dmn:text>&lt;= 0</dmn:text>
+                </dmn:inputEntry>
+                <dmn:outputEntry>
+                    <dmn:text>"Low"</dmn:text>
+                </dmn:outputEntry>
+                <dmn:annotationEntry>
+                    <dmn:text>string(-)</dmn:text>
+                </dmn:annotationEntry>
+            </dmn:rule>
+        </dmn:decisionTable>
+    </dmn:decision>
+</dmn:definitions>
