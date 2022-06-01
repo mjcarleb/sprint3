@@ -7,8 +7,8 @@ async def run_trade_match_batch(bpmn_process_id, merged_df):
     """Create C8 process to process all trades"""
 
     flag = False
-    await client.deploy_process("data/trade-reconcile.bpmn")
-    await client.deploy_process("data/decide-priority.dmn")
+    await client.deploy_process("process_models/sprint3-process_C8.bpmn")
+    await client.deploy_process("process_models/decide-priority.dmn")
 
     for i, (idx, trade) in enumerate(merged_df.iterrows()):
         if i == 100:
