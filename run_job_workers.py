@@ -25,6 +25,6 @@ def clear_thread(webhook_id):
 
 if __name__ == "__main__":
 
-    webhook_id = "webhook_6b1e1ba1-b276-4c5c-9b0d-d27442bb3a83"
+    webhook_id = "webhook_726e4b7b-86e7-44fa-a655-ca304c6bdac6"
     t = threading.Thread(clear_thread(webhook_id))
     t.start()
