@@ -14,8 +14,8 @@ def hello():
 def recevieWebhook():
     """ Jira has return webhook_id for which a Zeebe task is waiting """
 
-    webhook_id = request.form['webhook_id']
-    clear_c8_task.delay(webhook_id=webhook_id)
+    webhook_uuid = request.form['webhook_uuid']
+    clear_c8_task.delay(webhook_uuid=webhook_uuid)
     return {"status":  "ok"}
 
 if __name__ == '__main__':
