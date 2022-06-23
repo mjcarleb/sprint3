@@ -1,26 +1,19 @@
 from celery import Celery
-from celery.exceptions import SoftTimeLimitExceeded
 import sys
 from pyzeebe import ZeebeWorker, create_insecure_channel
 import asyncio
-import time
 
 app = Celery('tasks', broker='pyamqp://guest@localhost//')
 
-@app.task(soft_time_limit=10, time_limit=60)
+@app.task
 def add(x, y):
-    try:
-        time.sleep(20)
-    except SoftTimeLimitExceeded:
-        return None
-
     return x + y
 
 @app.task
 def exit(x, y):
     sys.exit(0)
 
-@app.task(soft_time_limit=30, time_limit=60)
+@app.task
 def clear_c8_task(webhook_id):
     channel = create_insecure_channel(
         hostname='44.199.120.6',
@@ -35,9 +28,5 @@ def clear_c8_task(webhook_id):
         return {}
 
     loop = asyncio.get_event_loop()
-    try:
-        loop.set_debug(True)
-        loop.run_until_complete(worker.work(one_shot=False))
-    except SoftTimeLimitExceeded:
-        loop.close()
-        return f"closed Zeebe loop for one-shot task type = {webhook_id}"
+    loop.set_debug(True)
+    loop.run_until_complete(worker.work(one_shot=True))
