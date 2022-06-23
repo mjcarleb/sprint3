@@ -36,6 +36,7 @@ class JobExecutor:
             await self.task.job_handler(job)
             if self.one_shot:
                 sys.exit(0)  #work is done above
+                
         except JobAlreadyDeactivatedError as error:
             logger.warning("Job was already deactivated. Job key: %s", error.job_key)
 
