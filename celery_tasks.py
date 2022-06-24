@@ -25,6 +25,10 @@ def clear_c8_task(webhook_uuid):
     #pid = self.pid
     worker = ZeebeWorker(grpc_channel=channel)
 
+    async def teardown():
+        await channel.close()
+        loop.close()
+
     @worker.task(task_type=f"{webhook_uuid}")
     def execute_webhook(url, method, webhook_uuid):
         # Now that Jira has returned the webhook_id, we just clear the task on Zeebe with return
@@ -36,5 +40,5 @@ def clear_c8_task(webhook_uuid):
         #loop.set_debug(True)
         loop.run_until_complete(worker.work()) #one_shot=True))
     except SoftTimeLimitExceeded:
-        #loop.close()
-        return f"Closed Zeebe loop for webhook={webhook_uuid}"
+        teardown()
+        return f"Finished Zeebe processing in Celery for webhook_uuid = {webhook_uuid}"
