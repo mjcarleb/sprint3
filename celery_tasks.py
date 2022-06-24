@@ -34,7 +34,7 @@ def clear_c8_task(webhook_uuid):
     try:
         loop = asyncio.get_event_loop()
         #loop.set_debug(True)
-        loop.run_until_complete(worker.work(one_shot=True))
+        loop.run_until_complete(worker.work()) #one_shot=True))
     except SoftTimeLimitExceeded:
-        loop.close()
+        #loop.close()
         return f"Closed Zeebe loop for webhook={webhook_uuid}"
